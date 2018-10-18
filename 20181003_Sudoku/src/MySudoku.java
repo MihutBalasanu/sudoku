@@ -52,23 +52,20 @@ public class MySudoku {
                  }
             }            
         }
-        if(testLine){
-            for (int i = 0; i < 9; i++) {                
-                test = mySudoku[j][sudokuMove.column];
-                for (int k = 0; k < 9; k++) {
-                     if(k != j && mySudoku[k][sudokuMove.column] == test){
-                         testColumn = false;
-                         return false;
-                     }
-                }                
-            }
-        }
-        if(testLine && testColumn){
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    test = smallSudoku(sudokuMove)[i][j];
-                    for (int k = 0; k < 3; k++) {
-                        for (int l = 0; l < 3; l++) {
+        for (int i = 0; i < 9; i++) {                
+             test = mySudoku[j][sudokuMove.column];
+             for (int k = 0; k < 9; k++) {
+                  if(k != j && mySudoku[k][sudokuMove.column] == test){
+                      testColumn = false;
+                      return false;
+                  }
+             }                
+        }       
+        for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) {
+                  test = smallSudoku(sudokuMove)[i][j];
+                  for (int k = 0; k < 3; k++) {
+                      for (int l = 0; l < 3; l++) {
                             if(k !=i && smallSudoku(sudokuMove)[k][l] == test){
                                 testRegion = false;
                                 return false
@@ -76,25 +73,15 @@ public class MySudoku {
                             }else{
                                 if(l != j && smallSudoku(sudokuMove)[k][l] == test){
                                     testRegion = false;
-                                    return false
-                                   
-
+                                    return false                   
                                 }
-                            }
-
-                        }
-
-                    }
-                }
-
-            }
-
-        }
-        return testRegion;
-
+                           }
+                      }
+                  }
+              }
+         }        
+        return true;
     }
-
-
 }
 
 
