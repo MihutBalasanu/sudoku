@@ -37,51 +37,43 @@ public class MySudoku {
     }
 
 
-    public static boolean isValidMove(SudokuMove sudokuMove){
+     public static boolean isValidMove(SudokuMove sudokuMove){ 
+        
+        int test;
 
-        boolean testLine = true;
-        boolean testColumn = true;
-        boolean testRegion = true;
-        int test;        
         for (int j = 0; j < 9; j++) {
             test = mySudoku[sudokuMove.line][j];
             for (int k = 0; k < 9; k++) {
-                 if(k != j && mySudoku[sudokuMove.line][k] == test){
-                     testLine = false;
-                     return false;
-                 }
-            }            
+                if(k != j && mySudoku[sudokuMove.line][k] == test){
+                    return false;
+                }
+            }
         }
-        for (int i = 0; i < 9; i++) {                
-             test = mySudoku[j][sudokuMove.column];
-             for (int k = 0; k < 9; k++) {
-                  if(k != j && mySudoku[k][sudokuMove.column] == test){
-                      testColumn = false;
-                      return false;
-                  }
-             }                
-        }       
+
+        for (int i = 0; i < 9; i++) {
+            test = mySudoku[i][sudokuMove.column];
+            for (int k = 0; k < 9; k++) {
+                if(k != i && mySudoku[k][sudokuMove.column] == test){
+                    return false;
+                }
+            }
+        }
+        
         for (int i = 0; i < 3; i++) {
-             for (int j = 0; j < 3; j++) {
-                  test = smallSudoku(sudokuMove)[i][j];
-                  for (int k = 0; k < 3; k++) {
-                      for (int l = 0; l < 3; l++) {
-                            if(k !=i && smallSudoku(sudokuMove)[k][l] == test){
-                                testRegion = false;
-                                return false
-                               
-                            }else{
-                                if(l != j && smallSudoku(sudokuMove)[k][l] == test){
-                                    testRegion = false;
-                                    return false                   
-                                }
-                           }
-                      }
-                  }
-              }
-         }        
+            for (int j = 0; j < 3; j++) {
+                test = smallSudoku(sudokuMove)[i][j];
+                for (int k = 0; k < 3; k++) {
+                    if(k !=i && smallSudoku(sudokuMove)[k][j] == test){ 
+                        return false;
+                    }else{
+                        if(k != j && smallSudoku(sudokuMove)[i][k] == test){ 
+                            return false;
+                        }
+                    }
+                }
+            }
+        }            
         return true;
     }
 }
-
 
