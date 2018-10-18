@@ -40,7 +40,7 @@ public class MySudoku {
      public static boolean isValidMove(SudokuMove sudokuMove){ 
         
         int test;
-
+// Testarea liniei
         for (int j = 0; j < 9; j++) {
             test = mySudoku[sudokuMove.line][j];
             for (int k = 0; k < 9; k++) {
@@ -49,7 +49,7 @@ public class MySudoku {
                 }
             }
         }
-
+// Testarea coloanei
         for (int i = 0; i < 9; i++) {
             test = mySudoku[i][sudokuMove.column];
             for (int k = 0; k < 9; k++) {
@@ -58,7 +58,7 @@ public class MySudoku {
                 }
             }
         }
-        
+// Testarea regiunii        
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 test = smallSudoku(sudokuMove)[i][j];
