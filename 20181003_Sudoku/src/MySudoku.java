@@ -42,30 +42,23 @@ public class MySudoku {
         boolean testLine = true;
         boolean testColumn = true;
         boolean testRegion = true;
-        int test;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                test = mySudoku[sudokuMove.line][j];
-                for (int k = 0; k < 9; k++) {
-                    if(k != j && mySudoku[sudokuMove.line][k] == test){
-                        testLine = false;
-                        
-                    }
-                }
-            }
-            return testLine;
+        int test;        
+        for (int j = 0; j < 9; j++) {
+            test = mySudoku[sudokuMove.line][j];
+            for (int k = 0; k < 9; k++) {
+                 if(k != j && mySudoku[sudokuMove.line][k] == test){
+                     testLine = false;                        
+                 }
+            }            
         }
         if(testLine){
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    test = mySudoku[j][sudokuMove.column];
-                    for (int k = 0; k < 9; k++) {
-                        if(k != j && mySudoku[k][sudokuMove.column] == test){
-                            testColumn = false;
-                            
-                        }
-                    }
-                }
+            for (int i = 0; i < 9; i++) {                
+                test = mySudoku[j][sudokuMove.column];
+                for (int k = 0; k < 9; k++) {
+                     if(k != j && mySudoku[k][sudokuMove.column] == test){
+                          testColumn = false;                            
+                     }
+                }                
             }
         }
         if(testLine && testColumn){
