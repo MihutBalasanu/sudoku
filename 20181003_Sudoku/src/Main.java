@@ -2,34 +2,34 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
         int n = 9;
         int[][] mySudoku = new int[9][9];
         int numberOfMoves = 0;
-        while(numberOfMoves < 81){
+        while (numberOfMoves < 81) {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Se face mutarea introducand: linia, coloana, valoarea; Ex: 2,3,8");
             String move = scanner.nextLine();
             String[] coords = move.split(",");
             Integer line = Integer.valueOf(coords[0]);
-            Integer column= Integer.valueOf(coords[1]);
+            Integer column = Integer.valueOf(coords[1]);
             Integer moveValue = Integer.valueOf(coords[2]);
-            boolean test = true;
+            SudokuMove sudokuMove = new SudokuMove(line, column, moveValue);
+            boolean test = MySudoku.isValidMove(sudokuMove);
 
 
-            while(line >= 9 || column >= 9 || moveValue <=0 || moveValue > 9 || !test){
+            if (line >= 9 || column >= 9 || moveValue <= 0 || moveValue > 9 || !test) {
                 System.out.println("Invalid move! ");
-                move = scanner.nextLine();
-                SudokuMove sudokuMove = new SudokuMove(line, column, moveValue);
-                test = MySudoku.isValidMove(sudokuMove);
+
+            } else {
+
                 MySudoku.makeMove(sudokuMove);
                 MySudoku.showSudoku(mySudoku);
+
+                numberOfMoves++;
+
             }
-
-
-            numberOfMoves++;
-
         }
     }
 }
