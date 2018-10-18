@@ -47,7 +47,8 @@ public class MySudoku {
             test = mySudoku[sudokuMove.line][j];
             for (int k = 0; k < 9; k++) {
                  if(k != j && mySudoku[sudokuMove.line][k] == test){
-                     testLine = false;                        
+                     testLine = false;
+                     return false;
                  }
             }            
         }
@@ -56,7 +57,8 @@ public class MySudoku {
                 test = mySudoku[j][sudokuMove.column];
                 for (int k = 0; k < 9; k++) {
                      if(k != j && mySudoku[k][sudokuMove.column] == test){
-                          testColumn = false;                            
+                         testColumn = false;
+                         return false;
                      }
                 }                
             }
@@ -69,10 +71,12 @@ public class MySudoku {
                         for (int l = 0; l < 3; l++) {
                             if(k !=i && smallSudoku(sudokuMove)[k][l] == test){
                                 testRegion = false;
+                                return false
                                
                             }else{
                                 if(l != j && smallSudoku(sudokuMove)[k][l] == test){
                                     testRegion = false;
+                                    return false
                                    
 
                                 }
