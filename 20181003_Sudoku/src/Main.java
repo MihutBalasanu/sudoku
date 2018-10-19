@@ -2,9 +2,8 @@ import java.util.Scanner;
 
 public class Main {
 
-  public static void main(String[] args) {
-        int n = 9;
-        int[][] mySudoku = new int[9][9];
+    public static void main(String[] args) {
+        MySudoku mySudoku = new MySudoku(9);
         int numberOfMoves = 0;
         while (numberOfMoves < 81) {
 
@@ -16,7 +15,7 @@ public class Main {
             Integer column = Integer.valueOf(coords[1]);
             Integer moveValue = Integer.valueOf(coords[2]);
             SudokuMove sudokuMove = new SudokuMove(line, column, moveValue);
-            boolean test = MySudoku.isValidMove(sudokuMove);
+            boolean test = MySudoku.isValidLine(sudokuMove) && MySudoku.isValidColumn(mySudoku) && MySudoku.isValidRegion(mySudoku);
 
 
             if (line >= 9 || column >= 9 || moveValue <= 0 || moveValue > 9 || !test) {
