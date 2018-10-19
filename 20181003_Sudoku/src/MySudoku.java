@@ -2,11 +2,17 @@
 public class MySudoku {
 
 
-    private static int n;
-    private static int[][] mySudoku = new int[n][n];
+    private int n;
+    private MySudoku mySudoku = new MySudoku(n);
 
+    public MySudoku(int n) {
+        this.n = n;
+        int[][] mySudoku = new int[n][n];
+    }
 
-    public static void showSudoku(int[][] mySudoku){
+    // Afisarea unei instante mySudoku
+
+    public  void showSudoku(int[][] mySudoku){
         for (int i = 0; i < mySudoku.length; i++) {
             for (int j = 0; j < mySudoku.length; j++) {
                 if (mySudoku[i][j] == 0){
@@ -18,13 +24,16 @@ public class MySudoku {
             System.out.println();
         }
     }
+    // Crearea unei noi instante mySudoku dupa o mutare
 
-    public static void makeMove(SudokuMove sudokuMove) {
+    public void makeMove(SudokuMove sudokuMove) {
         mySudoku[sudokuMove.line][sudokuMove.column] = sudokuMove.moveValue;
         showSudoku(mySudoku);
     }
 
-    public static int[][]smallSudoku(SudokuMove sudokuMove){
+    // Generarea regiunii de 3 X 3 corespunzatoare unei mutari ( unei instante sudokuMove )
+
+    public int[][]smallSudoku(SudokuMove sudokuMove){
         int[][]smallSudoku = new int[3][3];
         int r = sudokuMove.line - sudokuMove.line % 3;
         int c = sudokuMove.column - sudokuMove.column % 3;
@@ -36,44 +45,61 @@ public class MySudoku {
         return smallSudoku;
     }
 
+    // Testarea de linie
 
-     public static boolean isValidMove(SudokuMove sudokuMove){ 
-        
+    public boolean isValidLine(SudokuMove sudokuMove) {
+
         int test;
-// Testarea liniei
         for (int j = 0; j < 9; j++) {
             test = mySudoku[sudokuMove.line][j];
             for (int k = 0; k < 9; k++) {
-                if(k != j && mySudoku[sudokuMove.line][k] == test){
+                if (k != j && mySudoku[sudokuMove.line][k] == test) {
                     return false;
                 }
             }
         }
-// Testarea coloanei
+        return true;
+    }
+
+    // Testul de coloana
+
+    public boolean isValidColumn(SudokuMove sudokuMove){
+
+        int test;
         for (int i = 0; i < 9; i++) {
             test = mySudoku[i][sudokuMove.column];
-            for (int k = 0; k < 9; k++) {
-                if(k != i && mySudoku[k][sudokuMove.column] == test){
-                    return false;
+                for (int k = 0; k < 9; k++) {
+                    if (k != i && mySudoku[k][sudokuMove.column] == test) {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
-// Testarea regiunii        
+
+        // Testul de regiune 3 X 3
+
+    public boolean isValidRegion(SudokuMove sudokuMove){
+
+        int test;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 test = smallSudoku(sudokuMove)[i][j];
                 for (int k = 0; k < 3; k++) {
-                    if(k !=i && smallSudoku(sudokuMove)[k][j] == test){ 
+                    if(k !=i && smallSudoku(sudokuMove)[k][j] == test){
                         return false;
                     }else{
-                        if(k != j && smallSudoku(sudokuMove)[i][k] == test){ 
+                        if(k != j && smallSudoku(sudokuMove)[i][k] == test){
                             return false;
                         }
                     }
                 }
             }
-        }            
+        }
         return true;
     }
 }
+
+
+
 
