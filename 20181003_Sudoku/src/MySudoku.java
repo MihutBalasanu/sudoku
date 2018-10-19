@@ -36,15 +36,15 @@ public class MySudoku {
     // Generarea regiunii de 3 X 3 corespunzatoare unei mutari ( unei instante sudokuMove )
 
     public int[][] extractSudokuRegionOfMove(SudokuMove sudokuMove) {
-        int[][] smallSudoku = new int[3][3];
+        int[][] region = new int[3][3];
         int r = sudokuMove.line - sudokuMove.line % 3;
         int c = sudokuMove.column - sudokuMove.column % 3;
         for (int i = r; i < r + 3; i++) {
             for (int j = c; j < c + 3; j++) {
-                smallSudoku[i - r][j - c] = game[i][j];
+                region[i - r][j - c] = game[i][j];
             }
         }
-        return smallSudoku;
+        return region;
     }
 
     // Testarea de linie
@@ -82,16 +82,12 @@ public class MySudoku {
     // Testul de regiune 3 X 3
 
     public boolean isValidRegion(SudokuMove sudokuMove) {
-
-        int test;
+        int[][]region = extractSudokuRegionOfMove(sudokuMove);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                test = extractSudokuRegionOfMove(sudokuMove)[i][j];
                 for (int k = 0; k < 3; k++) {
-                    if (k != i && extractSudokuRegionOfMove(sudokuMove)[k][j] == test) {
-                        return false;
-                    } else {
-                        if (k != j && extractSudokuRegionOfMove(sudokuMove)[i][k] == test) {
+                    for (int l = 0; l < 3; l++) {
+                        if(region[i][j] == region[k][l] && !(i == k && j == l)){
                             return false;
                         }
                     }
@@ -101,6 +97,10 @@ public class MySudoku {
         return true;
     }
 }
+
+
+
+
 
 
 
