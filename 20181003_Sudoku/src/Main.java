@@ -15,16 +15,15 @@ public class Main {
             Integer column = Integer.valueOf(coords[1]);
             Integer moveValue = Integer.valueOf(coords[2]);
             SudokuMove sudokuMove = new SudokuMove(line, column, moveValue);
-            boolean test = MySudoku.isValidLine(sudokuMove) && MySudoku.isValidColumn(mySudoku) && MySudoku.isValidRegion(mySudoku);
 
+            boolean test = mySudoku.isValidLine(sudokuMove) && mySudoku.isValidColumn(sudokuMove) && mySudoku.isValidRegion(sudokuMove);
 
             if (line >= 9 || column >= 9 || moveValue <= 0 || moveValue > 9 || !test) {
                 System.out.println("Invalid move! ");
 
             } else {
 
-                MySudoku.makeMove(sudokuMove);
-                MySudoku.showSudoku(mySudoku);
+                mySudoku.makeMove(sudokuMove);
 
                 numberOfMoves++;
 
